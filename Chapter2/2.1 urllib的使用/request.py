@@ -18,3 +18,4 @@ req = request.Request(url=url, data=data, headers=headers, method='POST')
 # 我们依然使用 urlopen 方法来发送请求,只不过参数不再是 URL,而是一个 Request 类型的对象
 response = request.urlopen(req)
 print(response.read().decode('utf-8'))
+
