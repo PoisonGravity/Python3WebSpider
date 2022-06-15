@@ -76,10 +76,35 @@ requests
 
 # POST 请求
 # 例子
-import requests
-data = {'name': 'germey', 'age': '25'}
-r = requests.post("https://www.httpbin.org/post", data=data)
-print(r.text)
+# import requests
+# data = {'name': 'germey', 'age': '25'}
+# r = requests.post("https://www.httpbin.org/post", data=data)
+# print(r.text)
 
 
 # 文件上传
+# import requests
+#
+# files = {'file': open('favicon.ico', 'rb')}
+# r = requests.post('https://www.httpbin.org/post', files=files)
+# print(r.text)
+
+
+# Cookie 获取
+# 例子1：
+# import requests
+#
+# r = requests.get('https://www.baidu.com')
+# print(r.cookies)
+# for key, value in r.cookies.items():
+#     print(key + "=" + value)
+
+# 例子2：
+import requests
+
+headers = {
+    'cookie': '_octo=GH1.1.2133112272.1649413925; tz=Asia%2FShanghai; _device_id=3f76259ba6a9560b3c09c8ebbc19e0a7; user_session=0KW9eFkKJYzIP8o0OOmo7tRC_JFa_3lUl0I872xVkA1mkozv; __Host-user_session_same_site=0KW9eFkKJYzIP8o0OOmo7tRC_JFa_3lUl0I872xVkA1mkozv; tz=Asia%2FShanghai; color_mode=%7B%22color_mode%22%3A%22dark%22%2C%22light_theme%22%3A%7B%22name%22%3A%22light%22%2C%22color_mode%22%3A%22light%22%7D%2C%22dark_theme%22%3A%7B%22name%22%3A%22dark%22%2C%22color_mode%22%3A%22dark%22%7D%7D; logged_in=yes; dotcom_user=Lucid1ty; has_recent_activity=1; _gh_sess=cEN2MSTLQ9gTyQYHrH%2BYmcOGz9yL5uu2T9a5PoUNOlEcVVdRg6cyZx15mGHq73qRVDK1L5k5kROebZQFhNM%2BrCnJzxKCPRg4Ei8DlywwGMYP5nnQI%2BztlyCSY69UBbM%2BcvKDrOH%2B4OJEm7FrRzZir9STA9pSS%2FHEISavCVyo0UbtJemUnSt%2BQjUrSFmbvlOc0VJGtO0ziVsm4nUVIQRpj5%2BwqdDILP17aygnyKI60rGSFrpyyaVGTzDF4sFutFVf3mM4LtJtU%2FOk%2BMyMfh7FxujKgV8YRH8Uur0SDA%3D%3D--DA0ZZY8xgeibui%2Bl--6QDpmBpqM4g9W7uiGWZhlQ%3D%3D',
+    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36'
+}
+r = requests.get('https://github.com', headers=headers)
+print(r.text)
