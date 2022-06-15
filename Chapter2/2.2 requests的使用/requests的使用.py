@@ -161,9 +161,32 @@ requests
 
 
 # 身份认证
-import requests
-from requests.auth import HTTPBasicAuth
+# 例子1：
+# import requests
+# from requests.auth import HTTPBasicAuth
+#
+# r = requests.get('https://ssr3.scrape.center/', auth=HTTPBasicAuth('admin', 'admin'))
+# print(r.status_code)
 
-r = requests.get('https://ssr3.scrape.center/', auth=HTTPBasicAuth('admin', 'admin'))
-print(r.status_code)
+
+# 例子1更简单的写法：
+# import requests
+# # 直接传一个元组，它会默认使用 HTTPBasicAuth 这个类来认证
+# r = requests.get('https://ssr3.scrape.center/', auth=('admin', 'admin'))
+# print(r.status_code)
+
+
+# 使用 OAuth 认证
+# 先安装：pip3 install requests_oauthlib
+import requests
+from requests_oauthlib import OAuth1
+
+url = 'https://api.twitter.com/1.1/account/verify_credentials.json'
+auth = OAuth1('YOUR_APP_KEY', 'YOUR_APP_SECRET',
+              'USER_OAUTH_TOKEN', 'USER_OAUTH_TOKEN_SECRET')
+requests.get(url, auth=auth)
+
+
+
+
 
