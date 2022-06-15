@@ -178,15 +178,23 @@ requests
 
 # 使用 OAuth 认证
 # 先安装：pip3 install requests_oauthlib
+# import requests
+# from requests_oauthlib import OAuth1
+#
+# url = 'https://api.twitter.com/1.1/account/verify_credentials.json'
+# auth = OAuth1('YOUR_APP_KEY', 'YOUR_APP_SECRET',
+#               'USER_OAUTH_TOKEN', 'USER_OAUTH_TOKEN_SECRET')
+# requests.get(url, auth=auth)
+
+
+# 代理设置
 import requests
-from requests_oauthlib import OAuth1
-
-url = 'https://api.twitter.com/1.1/account/verify_credentials.json'
-auth = OAuth1('YOUR_APP_KEY', 'YOUR_APP_SECRET',
-              'USER_OAUTH_TOKEN', 'USER_OAUTH_TOKEN_SECRET')
-requests.get(url, auth=auth)
-
-
-
+# 下面这个代理可能无效，在网上找有效的代理试一下(有免费的也有付费的)
+proxies = {
+    'http': '183.247.215.218:30001',
+    'https': '122.51.231.113:8080'
+}
+r = requests.get('https://www.httpbin.org/get', proxies=proxies, timeout=5)
+print(r.text)
 
 
