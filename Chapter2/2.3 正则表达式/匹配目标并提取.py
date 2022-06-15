@@ -30,10 +30,18 @@
 
 # P67
 # 贪婪与非贪婪
+"""
+下面这个例子想要匹配1234567这些数字，但是只匹配到了7这一个数字
+原因是：使用：.* 匹配，它是贪婪的，会尽可能多的去匹配符合的字符
+这里它把123456都匹配了，只留下了7给\d+去匹配数字
+要解决的话，使用：.*? 即可，多加了一个问号，这样就是非贪婪的
+但是要注意：如果要匹配的结果在字符串的末尾，则.*?可能匹配不到任何内容！
+"""
 import re
 
 content = 'Hello 1234567 World_This is a Regex Demo'
-result = re.match('^He.*(\d+).*Demo$', content)
+# .* 与 .*?
+result = re.match('^He.*?(\d+).*?Demo$', content)
 print(result)
 print(result.group(1))
 
