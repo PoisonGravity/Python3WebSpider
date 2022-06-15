@@ -75,10 +75,11 @@ requests
 
 
 # POST 请求
+# 例子
+import requests
+data = {'name': 'germey', 'age': '25'}
+r = requests.post("https://www.httpbin.org/post", data=data)
+print(r.text)
 
 
-
-
-
-
-
+# 文件上传
