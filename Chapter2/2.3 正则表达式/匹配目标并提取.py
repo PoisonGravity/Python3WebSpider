@@ -48,15 +48,41 @@
 
 # 正则表达式中的修饰符
 # P68
+# import re
+# # 如果要匹配的内容中有换行符，如下
+# content = '''Hello 1234567 World_This
+#           is a Regex Demo'''
+# # 为了匹配换行符，我们在 match 方法中加入参数：re.S
+# # 这样就可以匹配到全部的字符了，不会因为匹配不到换行符而报错！
+# result = re.match('^He.*?(\d+).*Demo$', content, re.S)
+# print(result)
+# print(result.group(1))
+"""
+常用的修饰符：
+re.I 使匹配对大小写不敏感
+re.L 实现本地化识别
+re.M 多行匹配(影响^和$)
+re.S 使匹配内容包括换行符在内的所有字符
+re.U 根据 Unicode 字符集解析字符。会影响\w、\W、\b和\B
+re.X 更灵活的格式
+"""
+
+
+# 转义匹配  P69
 import re
-# 如果要匹配的内容中有换行符，如下
-content = '''Hello 1234567 World_This
-          is a Regex Demo'''
-# 为了匹配换行符，我们在 match 方法中加入参数：re.S
-# 这样就可以匹配到全部的字符了，不会因为匹配不到换行符而报错！
-result = re.match('^He.*?(\d+).*Demo$', content, re.S)
+"""
+遇到用作正则表达式匹配模式的特殊字符时，在这个字符前加反斜杠\转义一下即可
+比如：
+你要匹配.(点)这个字符，而这个字符刚好又是正则表达式匹配模式的特殊字符
+在写正则表达式的时候只需要转义一下：\.
+这样就表示你要匹配.(点)这个字符
+"""
+content = '(百度) www.baidu.com'
+result = re.match('\(百度 \) www\.baidu\.com', content)
 print(result)
-print(result.group(1))
+
+
+
 
 
 
