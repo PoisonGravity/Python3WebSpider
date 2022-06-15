@@ -37,12 +37,26 @@
 要解决的话，使用：.*? 即可，多加了一个问号，这样就是非贪婪的
 但是要注意：如果要匹配的结果在字符串的末尾，则.*?可能匹配不到任何内容！
 """
-import re
+# import re
+#
+# content = 'Hello 1234567 World_This is a Regex Demo'
+# # .* 与 .*?
+# result = re.match('^He.*?(\d+).*?Demo$', content)
+# print(result)
+# print(result.group(1))
 
-content = 'Hello 1234567 World_This is a Regex Demo'
-# .* 与 .*?
-result = re.match('^He.*?(\d+).*?Demo$', content)
+
+# 正则表达式中的修饰符
+# P68
+import re
+# 如果要匹配的内容中有换行符，如下
+content = '''Hello 1234567 World_This
+          is a Regex Demo'''
+# 为了匹配换行符，我们在 match 方法中加入参数：re.S
+# 这样就可以匹配到全部的字符了，不会因为匹配不到换行符而报错！
+result = re.match('^He.*?(\d+).*Demo$', content, re.S)
 print(result)
 print(result.group(1))
+
 
 
