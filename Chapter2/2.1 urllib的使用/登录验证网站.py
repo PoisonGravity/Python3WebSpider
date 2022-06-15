@@ -3,6 +3,8 @@
 # @Author : Cosmica
 # @File : 登录验证网站
 # @Project : Spider
+
+
 # P35
 # 遇到要登录的网站可能会弹出认证窗口让你输入用户名和密码登录
 # 这种情况借助 HTTPBasicAuthHandler 模块就可以完成，代码如下
