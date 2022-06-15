@@ -128,10 +128,42 @@ requests
 
 
 # 利用 Session
-import requests
+# import requests
+#
+# s = requests.Session()
+# s.get('https://www.httpbin.org/cookies/set/number/123456789')
+# r = s.get('https://www.httpbin.org/cookies')
+# print(r.text)   # Cookie 被成功获取！
 
-s = requests.Session()
-s.get('https://www.httpbin.org/cookies/set/number/123456789')
-r = s.get('https://www.httpbin.org/cookies')
-print(r.text)   # Cookie 被成功获取！
+
+# SSL 证书验证
+# import requests
+# import logging
+# from requests.packages import urllib3 # 这里报错，不知道为什么
+#
+# # 捕获警告到日志中从而忽略警告
+# logging.captureWarnings(True)
+#
+#
+# # 另一种方式忽略警告
+# # urllib3.disable_warnings()
+#
+# # 在 get 方法中填入参数：verify=False 可以忽略网站证书的验证
+# response = requests.get('https://ssr2.scrape.center/', verify=False)
+# print(response.status_code)
+
+
+# 超时设置
+# import requests
+# # 只需要在 get 方法中添加 timeout 参数即可
+# r = requests.get('https://www.httpbin.org/get', timeout=0.1)
+# print(r.status_code)
+
+
+# 身份认证
+import requests
+from requests.auth import HTTPBasicAuth
+
+r = requests.get('https://ssr3.scrape.center/', auth=HTTPBasicAuth('admin', 'admin'))
+print(r.status_code)
 
