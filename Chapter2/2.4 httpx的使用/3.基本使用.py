@@ -15,11 +15,20 @@
 
 
 # 下面换一个 User-Agent 再请求一次
+# import httpx
+#
+# headers = {
+#     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36'
+# }
+# response = httpx.get('https://httpbin.org/get', headers=headers)
+# print(response.text)
+
+
+# 回到那个强制使用 HTTP/2.0 的网站
 import httpx
-
-headers = {
-    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36'
-}
-response = httpx.get('https://httpbin.org/get', headers=headers)
-
+# 必须手动声明使用 HTTP/2.0 才能生效
+client = httpx.Client(http2=True)
+response = client.get('https://spa16.scrape.center/')
 print(response.text)
+
+
