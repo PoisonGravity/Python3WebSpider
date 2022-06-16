@@ -142,19 +142,22 @@ def save_data(data):
     json.dump(data, open(data_path, 'w', encoding='utf-8'), ensure_ascii=False, indent=2)
 
 
-def main():
-    # page 的范围：1-10
-    for page in range(1, TOTAL_PAGE + 1):
-        index_html = scrape_index(page)
-        detail_urls = parse_index(index_html)
-        for detail_url in detail_urls:
-            detail_html = scrape_detail(detail_url)
-            data = parse_detail(detail_html)
-            logging.info('get detail data %s', data)
-            logging.info('saving data to json file')
-            save_data(data)
-            logging.info('data saved successfully')
+def main(page):
+    index_html = scrape_index(page)
+    detail_urls = parse_index(index_html)
+    for detail_url in detail_urls:
+        detail_html = scrape_detail(detail_url)
+        data = parse_detail(detail_html)
+        logging.info('get detail data %s', data)
+        logging.info('saving data to json data')
+        save_data(data)
+        logging.info('data saved successfully')
 
 
 if __name__ == '__main__':
-    main()
+    # 多进程加速快的飞起！
+    pool = multiprocessing.Pool()
+    pages = range(1, TOTAL_PAGE + 1)
+    pool.map(main, pages)
+    pool.close()
+    pool.join()
