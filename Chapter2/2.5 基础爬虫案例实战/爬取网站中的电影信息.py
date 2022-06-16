@@ -20,10 +20,12 @@
 import requests  # 用于爬取页面
 import logging  # 用于输出信息
 import re   # 实现正则表达式解析
-import json # 用于将数据保存为 json 格式
+import json  # 用于将数据保存为 json 格式
+import multiprocessing  # 多进程加速
 from os import makedirs  # 用于创建目录
 from os.path import exists  # 用于判断目录是否存在
 from urllib.parse import urljoin    # URL 拼接
+
 
 #  定义日志输出级别和格式
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s: %(message)s')
