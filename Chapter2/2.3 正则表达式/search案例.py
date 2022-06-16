@@ -38,20 +38,3 @@ if result:
 result = re.search('<li.*?singer="(.*?)">(.*?)</a>', html)
 if result:
     print(result.group(1), result.group(2))
-
-results = re.findall('<li.*?href="(.*?)".*?singer="(.*?)">(.*?)</a>', html, re.S)
-print(results)
-print(type(results))
-for result in results:
-    print(result)
-    print(result[0], result[1], result[2])
-
-results = re.findall('<li.*?>\s*?(<a.*?>)?(\w+)(</a>)?\s*?</li>', html, re.S)
-for result in results:
-    print(result[1])
-
-html = re.sub('<a.*?>|</a>', '', html)
-print(html)
-results = re.findall('<li.*?>(.*?)</li>', html, re.S)
-for result in results:
-    print(result.strip())
