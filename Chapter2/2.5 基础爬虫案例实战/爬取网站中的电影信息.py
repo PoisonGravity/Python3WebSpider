@@ -7,18 +7,22 @@
 
 # P82
 # 目标网站：https://ssr1.scrape.center/
-'''
-本节目标：
-    利用 requests 爬取这个站点每一页的电影列表，顺着列表再爬取每个电影的详情页
-    利用正则表达式提取每部分电影的名称、封面、类别、上映时间、评分、剧情简介等内容
-    把以上爬取的内容保存为 JSON 文本文件
-    使用多进程实现爬取加速
-'''
+
+
+# 本节目标：
+#     利用 requests 爬取这个站点每一页的电影列表，顺着列表再爬取每个电影的详情页
+#     利用正则表达式提取每部分电影的名称、封面、类别、上映时间、评分、剧情简介等内容
+#     把以上爬取的内容保存为 JSON 文本文件
+#     使用多进程实现爬取加速
+
 
 # 定义基础变量并且引入一些必要的库
 import requests  # 用于爬取页面
 import logging  # 用于输出信息
 import re   # 实现正则表达式解析
+import json # 用于将数据保存为 json 格式
+from os import makedirs  # 用于创建目录
+from os.path import exists  # 用于判断目录是否存在
 from urllib.parse import urljoin    # URL 拼接
 
 #  定义日志输出级别和格式
@@ -121,14 +125,34 @@ def parse_detail(html):
     }
 
 
+RESULTS_DIR = 'results'
+exists(RESULTS_DIR) or makedirs(RESULTS_DIR)
+
+
+def save_data(data):
+    """
+    将数据保存至 results 文件夹下，每个电影单独命名，格式为 json
+    :param data: 字典格式的电影数据
+    """
+    name = data.get('name')
+    data_path = f'{RESULTS_DIR}/{name}.json'
+    # ensure_ascii=False 确保中文能正常显示
+    json.dump(data, open(data_path, 'w', encoding='utf-8'), ensure_ascii=False, indent=2)
+
+
 def main():
     # page 的范围：1-10
     for page in range(1, TOTAL_PAGE + 1):
         index_html = scrape_index(page)
         detail_urls = parse_index(index_html)
-        logging.info('detail urls %s', list(detail_urls))
+        for detail_url in detail_urls:
+            detail_html = scrape_detail(detail_url)
+            data = parse_detail(detail_html)
+            logging.info('get detail data %s', data)
+            logging.info('saving data to json file')
+            save_data(data)
+            logging.info('data saved successfully')
 
 
-# main 方法
 if __name__ == '__main__':
     main()
