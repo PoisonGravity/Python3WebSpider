@@ -14,4 +14,4 @@ requests 和 urllib 只能支持 HTTP/1.1
 # 下面就是一个强制使用 HTTP/2.0 的网站
 url = 'https://spa16.scrape.center/'
 response = requests.get(url)
-print(response.json())
+print(response.json())  # 报错
