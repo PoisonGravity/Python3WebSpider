@@ -32,3 +32,6 @@ response = client.get('https://spa16.scrape.center/')
 print(response.text)
 
 
+# 与 requests 类似，很多方法是一样的
+# P76
+
