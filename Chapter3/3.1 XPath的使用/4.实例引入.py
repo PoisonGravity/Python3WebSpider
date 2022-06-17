@@ -17,6 +17,6 @@ text = '''
      </ul>
  </div>
 '''
-html = etree.HTML(text)
-result = etree.tostring(html)
-print(result.decode('utf-8'))
+html = etree.HTML(text)  # 调用 HTML 类进行初始化，这样就构造了一个 XPath 解析对象，此时它会自动修正 HTML 文本
+result = etree.tostring(html)   # 输出修正后的 HTML 代码(bytes类型)
+print(result.decode('utf-8'))   # 利用 decode 方法将其转为 str 类型
